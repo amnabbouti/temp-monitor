@@ -1,38 +1,37 @@
 # temp-monitor
 
-A small C++ console program that reads temperature values from standard input
-and emits a simple status (`OK` / `WARNING`) based on a fixed threshold.
+Temperature monitoring tool that reads CSV samples and tracks state transitions.
 
-This project is intentionally minimal and focused on:
-- deterministic behavior
-- explicit input validation
-- clear control flow
-- build-from-terminal workflow (CMake)
+## What it does
 
-It is meant as a learning and portfolio project oriented toward
-**systems / safety-critical style software**, not UI or web development.
+Parses timestamped temperature readings from stdin in CSV format:
 
----
+```
+1234567890,65
+1234567891,72
+1234567892,95
+```
 
-## Behavior
+Tracks monitor state based on temperature thresholds:
 
-- Reads integer values from **stdin**
-- For each value:
-  - `OK` if value ≤ 70
-  - `WARNING` if value > 70
-- Stops on end-of-file (EOF)
-- Exits with error code `1` if input is invalid (non-integer)
+- **OK**: normal operating range
+- **WARNING**: elevated temperature
+- **ALARM**: critical temperature
+- **SENSOR_FAIL**: invalid/missing data
 
----
+Input validation is strict - malformed lines are rejected, no exceptions thrown, minimal allocations.
 
 ## Build
 
 Requirements:
-- C++ compiler (GCC or Clang)
-- CMake
-- Ninja (recommended)
+
+- C++20 compiler (GCC/Clang)
+- CMake 3.20+
+- Ninja (optional but recommended)
 
 ```bash
 cmake -S . -B build -G Ninja
 cmake --build build
+./build/temp-monitor
 
+```
