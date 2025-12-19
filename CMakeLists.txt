@@ -7,6 +7,9 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 add_executable(temp-monitor
   src/main.cpp
+  src/parser.cpp
 )
+
+target_include_directories(temp-monitor PRIVATE src)
 
 target_compile_options(temp-monitor PRIVATE -Wall -Wextra -Wpedantic)

@@ -21,7 +21,8 @@ inline std::string_view to_string(MonitorState s) {
 		case MonitorState::OK: return "OK";
 		case MonitorState::WARNING: return "WARNING";
 		case MonitorState::ALARM: return "ALARM";
-		case MonitorState::SENSOR_FAIL: return "SENSOR_fail";
-		}
+		case MonitorState::SENSOR_FAIL: return "SENSOR_FAIL";
+	}
 	return "UNKNOWN";
 
+}
